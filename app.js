@@ -1,3 +1,4 @@
+
 var mapboxAccessToken = "pk.eyJ1Ijoic3R1YXJ0bWFjayIsImEiOiJja2hlYWFiNXYwZGxqMnJudjVqdGZiY3VpIn0.4hD2d_CU4I-Fn54yapqHaQ";
 var map = L.map('mapid').setView([37.8, -96], 4);
 
@@ -61,6 +62,7 @@ var geojson;
 // custom info variable
 var info = L.control();
 
+
 // stamen map
 var stamenLayer = new L.StamenTileLayer("toner");
 map.addLayer(stamenLayer);
@@ -79,10 +81,10 @@ map.addLayer(stamenLayer);
 L.geoJson(statesData).addTo(map);
 
 
-function getColor(name) {
-    return name.includes("a") ? '#b7e3fc' :
-                                '#b7e3fc';
-}
+// function getColor(name) {
+//   return name.includes("a") ? '#b7e3fc' :
+//                               '#b7e3fc';
+//}
 
 function style(feature) {
     return {
@@ -93,6 +95,18 @@ function style(feature) {
         dashArray: '3',
         fillOpacity: 0.7
     };
+
+function getColor(d) {
+  return d > 1000 ? '#800026' :
+         d > 500  ? '#BD0026' :
+         d > 200  ? '#E31A1C' :
+         d > 100  ? '#FC4E2A' :
+         d > 50   ? '#FD8D3C' :
+         d > 20   ? '#FEB24C' :
+         d > 10   ? '#FED976' :
+                    '#FFEDA0';
+}
+
 }
 
 L.geoJson(statesData, {style: style}).addTo(map);
@@ -164,5 +178,3 @@ info.update = function (props) {
 };
 
 info.addTo(map);
-
-
